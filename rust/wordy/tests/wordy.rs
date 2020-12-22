@@ -91,14 +91,12 @@ fn multiple_divisions() {
 }
 
 #[test]
-#[ignore]
 fn unknown_operation() {
     let command = "What is 52 cubed?";
     assert_eq!(None, answer(command));
 }
 
 #[test]
-#[ignore]
 fn non_math_question() {
     let command = "Who is the President of the United States?";
     assert_eq!(None, answer(command));
@@ -112,14 +110,12 @@ fn reject_problem_missing_an_operand() {
 }
 
 #[test]
-#[ignore]
 fn reject_problem_with_no_operands_or_operators() {
     let command = "What is?";
     assert_eq!(None, answer(command));
 }
 
 #[test]
-#[ignore]
 fn reject_two_operations_in_a_row() {
     let command = "What is 1 plus plus 2?";
     assert_eq!(None, answer(command));
