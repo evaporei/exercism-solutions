@@ -37,7 +37,6 @@ fn subtraction() {
 }
 
 #[test]
-#[ignore]
 fn multiplication() {
     let command = "What is -3 multiplied by 25?";
     assert_eq!(Some(-75), answer(command));

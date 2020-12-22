@@ -6,6 +6,7 @@ pub fn answer(command: &str) -> Option<i32> {
     let tokens = command
         .replace("What is ", "")
         .replace("?", "")
+        .replace("by ", "")
         .split(" ")
         .map(Token::try_from)
         .collect::<Result<Vec<Token>, ()>>()
@@ -26,6 +27,7 @@ pub fn answer(command: &str) -> Option<i32> {
 enum Operator {
     Plus,
     Minus,
+    Multiplication,
 }
 
 impl Operator {
@@ -33,6 +35,7 @@ impl Operator {
         match self {
             Operator::Plus => lhs + rhs,
             Operator::Minus => lhs - rhs,
+            Operator::Multiplication => lhs * rhs,
         }
     }
 }
@@ -54,6 +57,7 @@ impl TryFrom<&str> for Token {
         match &token[..] {
             "plus" => Ok(Token::Operator(Operator::Plus)),
             "minus" => Ok(Token::Operator(Operator::Minus)),
+            "multiplied" => Ok(Token::Operator(Operator::Multiplication)),
             _ => Err(()),
         }
     }
