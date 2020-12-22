@@ -140,7 +140,6 @@ fn reject_prefix_notation() {
 }
 
 #[test]
-#[ignore]
 #[cfg(feature = "exponentials")]
 fn exponential() {
     let command = "What is 2 raised to the 5th power?";
@@ -148,7 +147,6 @@ fn exponential() {
 }
 
 #[test]
-#[ignore]
 #[cfg(feature = "exponentials")]
 fn addition_and_exponential() {
     let command = "What is 1 plus 2 raised to the 2nd power?";

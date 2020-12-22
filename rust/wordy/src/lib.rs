@@ -1,12 +1,25 @@
 use std::convert::TryFrom;
+#[cfg(feature = "exponentials")]
+use std::convert::TryInto;
 
 pub struct WordProblem;
 
 pub fn answer(command: &str) -> Option<i32> {
-    let tokens = command
+    let replaced = command
+        .replace("What is ", "")
+        .replace("?", "")
+        .replace("by ", "");
+
+    #[cfg(feature = "exponentials")]
+    let replaced = command
         .replace("What is ", "")
         .replace("?", "")
         .replace("by ", "")
+        .replace("to the ", "")
+        .replace("th power", "")
+        .replace("nd power", "");
+
+    let tokens = replaced
         .split(" ")
         .map(Token::try_from)
         .collect::<Result<Vec<Token>, ()>>()
@@ -31,6 +44,8 @@ enum Operator {
     Minus,
     Multiplication,
     Division,
+    #[cfg(feature = "exponentials")]
+    Exponential,
 }
 
 impl Operator {
@@ -40,6 +55,8 @@ impl Operator {
             Operator::Minus => lhs - rhs,
             Operator::Multiplication => lhs * rhs,
             Operator::Division => lhs / rhs,
+            #[cfg(feature = "exponentials")]
+            Operator::Exponential => lhs.pow(rhs.try_into().unwrap()),
         }
     }
 }
@@ -63,6 +80,8 @@ impl TryFrom<&str> for Token {
             "minus" => Ok(Token::Operator(Operator::Minus)),
             "multiplied" => Ok(Token::Operator(Operator::Multiplication)),
             "divided" => Ok(Token::Operator(Operator::Division)),
+            #[cfg(feature = "exponentials")]
+            "raised" => Ok(Token::Operator(Operator::Exponential)),
             _ => Err(()),
         }
     }
