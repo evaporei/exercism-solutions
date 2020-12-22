@@ -28,6 +28,7 @@ enum Operator {
     Plus,
     Minus,
     Multiplication,
+    Division,
 }
 
 impl Operator {
@@ -36,6 +37,7 @@ impl Operator {
             Operator::Plus => lhs + rhs,
             Operator::Minus => lhs - rhs,
             Operator::Multiplication => lhs * rhs,
+            Operator::Division => lhs / rhs,
         }
     }
 }
@@ -58,6 +60,7 @@ impl TryFrom<&str> for Token {
             "plus" => Ok(Token::Operator(Operator::Plus)),
             "minus" => Ok(Token::Operator(Operator::Minus)),
             "multiplied" => Ok(Token::Operator(Operator::Multiplication)),
+            "divided" => Ok(Token::Operator(Operator::Division)),
             _ => Err(()),
         }
     }
