@@ -103,7 +103,6 @@ fn non_math_question() {
 }
 
 #[test]
-#[ignore]
 fn reject_problem_missing_an_operand() {
     let command = "What is 1 plus?";
     assert_eq!(None, answer(command));
