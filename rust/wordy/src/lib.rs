@@ -96,13 +96,21 @@ fn parse<'a>(tokens: Vec<Token>) -> Result<i32, &'a str> {
                 lhs: None,
                 rhs: None,
                 operator: None,
-                ..
+                accumulator,
             } => match token {
                 Token::Number(number) => Ok(State {
                     lhs: Some(number),
                     ..state
                 }),
-                Token::Operator(_) => Err("operator shoudn't be the first one"),
+                Token::Operator(operator) => match accumulator {
+                    0 => Err("operator shoudn't be the first one"),
+                    n => Ok(State {
+                        lhs: Some(n),
+                        operator: Some(operator),
+                        accumulator: 0,
+                        ..state
+                    }),
+                },
             },
             State {
                 lhs: Some(_),
