@@ -46,11 +46,12 @@ impl TryFrom<&str> for Token {
 
     fn try_from(token: &str) -> Result<Self, Self::Error> {
         if let Ok(number) = token.parse::<i32>() {
-            Ok(Token::Number(number))
-        } else if token == "plus" {
-            Ok(Token::Operator(Operator::Plus))
-        } else {
-            Err(())
+            return Ok(Token::Number(number));
+        }
+
+        match &token[..] {
+            "plus" => Ok(Token::Operator(Operator::Plus)),
+            _ => Err(()),
         }
     }
 }
