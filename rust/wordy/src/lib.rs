@@ -12,6 +12,8 @@ pub fn answer(command: &str) -> Option<i32> {
         .collect::<Result<Vec<Token>, ()>>()
         .ok()?;
 
+    // println!("tokens: {:?}", tokens);
+
     if tokens.len() == 1 {
         if let Ok(Token::Number(n)) = Token::try_from(tokens[0]) {
             return Some(n);
@@ -23,7 +25,7 @@ pub fn answer(command: &str) -> Option<i32> {
     result.ok()
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 enum Operator {
     Plus,
     Minus,
@@ -42,7 +44,7 @@ impl Operator {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 enum Token {
     Number(i32),
     Operator(Operator),
@@ -66,7 +68,7 @@ impl TryFrom<&str> for Token {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 struct State {
     lhs: Option<i32>,
     rhs: Option<i32>,
@@ -88,6 +90,7 @@ impl State {
 fn parse<'a>(tokens: Vec<Token>) -> Result<i32, &'a str> {
     let state = tokens.into_iter().fold(Ok(State::new()), |state, token| {
         let state = state?;
+        // println!("state: {:?}", state);
         let state = match state {
             State {
                 lhs: None,
