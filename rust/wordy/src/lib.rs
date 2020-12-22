@@ -25,17 +25,13 @@ pub fn answer(command: &str) -> Option<i32> {
         .collect::<Result<Vec<Token>, ()>>()
         .ok()?;
 
-    // println!("tokens: {:?}", tokens);
-
     if tokens.len() == 1 {
         if let Ok(Token::Number(n)) = Token::try_from(tokens[0]) {
             return Some(n);
         }
     }
 
-    let result = parse(tokens);
-    // println!("result: {:?}", result);
-    result.ok()
+    parse(tokens).ok()
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -109,7 +105,7 @@ impl State {
 fn parse<'a>(tokens: Vec<Token>) -> Result<i32, &'a str> {
     let state = tokens.into_iter().fold(Ok(State::new()), |state, token| {
         let state = state?;
-        // println!("state: {:?}", state);
+
         let state = match state {
             State {
                 lhs: None,
