@@ -25,12 +25,14 @@ pub fn answer(command: &str) -> Option<i32> {
 #[derive(Copy, Clone)]
 enum Operator {
     Plus,
+    Minus,
 }
 
 impl Operator {
     fn operate(self, lhs: i32, rhs: i32) -> i32 {
         match self {
             Operator::Plus => lhs + rhs,
+            Operator::Minus => lhs - rhs,
         }
     }
 }
@@ -51,6 +53,7 @@ impl TryFrom<&str> for Token {
 
         match &token[..] {
             "plus" => Ok(Token::Operator(Operator::Plus)),
+            "minus" => Ok(Token::Operator(Operator::Minus)),
             _ => Err(()),
         }
     }

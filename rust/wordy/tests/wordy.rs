@@ -31,7 +31,6 @@ fn large_addition() {
 }
 
 #[test]
-#[ignore]
 fn subtraction() {
     let command = "What is 4 minus -12?";
     assert_eq!(Some(16), answer(command));
