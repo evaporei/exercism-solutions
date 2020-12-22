@@ -11,16 +11,34 @@ pub fn answer(command: &str) -> Option<i32> {
         .collect::<Result<Vec<Token>, ()>>()
         .ok()?;
 
-    AST::try_from(tokens)
-        .ok()
-        .map(i32::try_from)
-        .map(Result::ok)
-        .flatten()
+    if tokens.len() == 1 {
+        if let Ok(Token::Number(n)) = Token::try_from(tokens[0]) {
+            return Some(n);
+        }
+    }
+
+    let result = parse(tokens);
+    // println!("result: {:?}", result);
+    result.ok()
 }
 
+#[derive(Copy, Clone)]
+enum Operator {
+    Plus,
+}
+
+impl Operator {
+    fn operate(self, lhs: i32, rhs: i32) -> i32 {
+        match self {
+            Operator::Plus => lhs + rhs,
+        }
+    }
+}
+
+#[derive(Copy, Clone)]
 enum Token {
     Number(i32),
-    Plus,
+    Operator(Operator),
 }
 
 impl TryFrom<&str> for Token {
@@ -30,30 +48,91 @@ impl TryFrom<&str> for Token {
         if let Ok(number) = token.parse::<i32>() {
             Ok(Token::Number(number))
         } else if token == "plus" {
-            Ok(Token::Plus)
+            Ok(Token::Operator(Operator::Plus))
         } else {
             Err(())
         }
     }
 }
 
-enum AST {
-    Operator(Box<AST>, Box<AST>, Box<AST>),
-    Token(Token),
+#[derive(Copy, Clone)]
+struct State {
+    lhs: Option<i32>,
+    rhs: Option<i32>,
+    operator: Option<Operator>,
+    accumulator: i32,
 }
 
-impl TryFrom<Vec<Token>> for AST {
-    type Error = ();
-
-    fn try_from(tokens: Vec<Token>) -> Result<Self, Self::Error> {
-        tokens.windows(3).fold(Err(()), |acc, curr| acc)
+impl State {
+    fn new() -> Self {
+        State {
+            lhs: None,
+            rhs: None,
+            operator: None,
+            accumulator: 0,
+        }
     }
 }
 
-impl TryFrom<AST> for i32 {
-    type Error = ();
+fn parse<'a>(tokens: Vec<Token>) -> Result<i32, &'a str> {
+    let state = tokens.into_iter().fold(Ok(State::new()), |state, token| {
+        let state = state?;
+        let state = match state {
+            State {
+                lhs: None,
+                rhs: None,
+                operator: None,
+                ..
+            } => match token {
+                Token::Number(number) => Ok(State {
+                    lhs: Some(number),
+                    ..state
+                }),
+                Token::Operator(_) => Err("operator shoudn't be the first one"),
+            },
+            State {
+                lhs: Some(_),
+                rhs: None,
+                operator: None,
+                ..
+            } => match token {
+                Token::Number(_) => Err("should receive operator, not number"),
+                Token::Operator(operator) => Ok(State {
+                    operator: Some(operator),
+                    ..state
+                }),
+            },
+            State {
+                lhs: Some(_),
+                rhs: None,
+                operator: Some(_),
+                ..
+            } => match token {
+                Token::Number(number) => Ok(State {
+                    rhs: Some(number),
+                    ..state
+                }),
+                Token::Operator(_) => Err("should receive right side number, not operator"),
+            },
+            _ => Err("none of the cases hmmm"),
+        };
 
-    fn try_from(ast: AST) -> Result<Self, Self::Error> {
-        Err(())
-    }
+        if let State {
+            lhs: Some(lhs),
+            rhs: Some(rhs),
+            operator: Some(operator),
+            accumulator,
+        } = state?
+        {
+            Ok(State {
+                lhs: None,
+                rhs: None,
+                operator: None,
+                accumulator: accumulator + operator.operate(lhs, rhs),
+            })
+        } else {
+            state
+        }
+    });
+    Ok(state?.accumulator)
 }
