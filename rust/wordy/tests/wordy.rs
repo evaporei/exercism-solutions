@@ -122,21 +122,18 @@ fn reject_two_operations_in_a_row() {
 }
 
 #[test]
-#[ignore]
 fn reject_two_numbers_in_a_row() {
     let command = "What is 1 plus 2 1?";
     assert_eq!(None, answer(command));
 }
 
 #[test]
-#[ignore]
 fn reject_postfix_notation() {
     let command = "What is 1 2 plus?";
     assert_eq!(None, answer(command));
 }
 
 #[test]
-#[ignore]
 fn reject_prefix_notation() {
     let command = "What is plus 1 2?";
     assert_eq!(None, answer(command));

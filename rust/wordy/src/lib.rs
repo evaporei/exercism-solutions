@@ -156,5 +156,16 @@ fn parse<'a>(tokens: Vec<Token>) -> Result<i32, &'a str> {
             state
         }
     });
-    Ok(state?.accumulator)
+
+    if let State {
+        lhs: None,
+        rhs: None,
+        operator: None,
+        accumulator,
+    } = state?
+    {
+        return Ok(accumulator);
+    }
+
+    Err("has accumulated value, but some operations are not complete")
 }
