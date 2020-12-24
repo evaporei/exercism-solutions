@@ -1,34 +1,23 @@
 let modulo = (n, m) => n mod m === 0;
 
-let pling = n => switch (modulo(n, 3)) {
-  | true => "Pling"
-  | false => ""
-};
+let factors = [
+  (3, "Pling"),
+  (5, "Plang"),
+  (7, "Plong"),
+];
 
-let plang = n => switch (modulo(n, 5)) {
-  | true => "Plang"
-  | false => ""
-};
-
-let plong = n => switch (modulo(n, 7)) {
-  | true => "Plong"
-  | false => ""
-};
-
-let generic = string_of_int;
+let reducer = n => (acc, (factor, str)) =>
+  modulo(n, factor)
+    ? acc ++ str
+    : acc ++ "";
 
 let raindrops = n => {
-  let fns = [pling, plang, plong];
-
   switch (Belt.List.reduce(
-    fns,
+    factors,
     "",
-    (acc, fn) => {
-      let result = fn(n);
-      acc ++ result
-    }
+    reducer(n)
   )) {
-    | "" => generic(n)
-    | a => a
+    | "" => string_of_int(n)
+    | s => s
   }
 };
