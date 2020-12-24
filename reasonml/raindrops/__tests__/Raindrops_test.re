@@ -24,7 +24,7 @@ let () =
       () =>
       expect(Raindrops.raindrops(8)) |> toEqual("8")
     );
-    Skip.test("the sound for 9 is Pling as it has a factor 3", () =>
+    test("the sound for 9 is Pling as it has a factor 3", () =>
       expect(Raindrops.raindrops(9)) |> toEqual("Pling")
     );
     Skip.test("the sound for 10 is Plang as it has a factor 5", () =>
