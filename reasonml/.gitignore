@@ -2,3 +2,4 @@
 **/lib
 **/*.bs.js
 **/.merlin
+**/.bsb.lock
