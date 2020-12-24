@@ -19,7 +19,7 @@ let () =
     test("the sound for 6 is Pling as it has a factor 3", () =>
       expect(Raindrops.raindrops(6)) |> toEqual("Pling")
     );
-    Skip.test(
+    test(
       "2 to the power 3 does not make a raindrop sound as 3 is the exponent not the base",
       () =>
       expect(Raindrops.raindrops(8)) |> toEqual("8")
