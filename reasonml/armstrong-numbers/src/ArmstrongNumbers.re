@@ -4,7 +4,17 @@ let validate = n => {
     ->Js.String.split("", _)
     ->Belt.Array.map(int_of_string);
 
-  let pow = float_of_int(n) ** float_of_int(Belt.Array.length(digits));
+  let exponent = float_of_int(Belt.Array.length(digits));
 
-  n === int_of_float(pow)
+  let exponentials_sum = Belt.Array.reduce(
+    digits,
+    0,
+    (acc, curr) => {
+      let exponential = float_of_int(curr) ** exponent;
+
+      acc + int_of_float(exponential)
+    }
+  );
+
+  n === exponentials_sum
 };
