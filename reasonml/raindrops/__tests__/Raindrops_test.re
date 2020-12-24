@@ -4,7 +4,7 @@ open Expect;
 
 let () =
   describe("Raindrops", () => {
-    Skip.test("the sound for 1 is 1", () =>
+    test("the sound for 1 is 1", () =>
       expect(Raindrops.raindrops(1)) |> toEqual("1")
     );
     Skip.test("the sound for 3 is Pling", () =>
