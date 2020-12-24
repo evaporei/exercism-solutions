@@ -1,7 +1,8 @@
 let raindrops = n => {
-  let result = switch (n mod n) {
-    | 0 => n
+  let result = switch (n) {
+    | n when n mod 3 === 0 => "Pling"
+    | _ => string_of_int(n)
   };
 
-  string_of_int(result)
+  result
 };

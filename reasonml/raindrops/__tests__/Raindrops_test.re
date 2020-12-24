@@ -7,7 +7,7 @@ let () =
     test("the sound for 1 is 1", () =>
       expect(Raindrops.raindrops(1)) |> toEqual("1")
     );
-    Skip.test("the sound for 3 is Pling", () =>
+    test("the sound for 3 is Pling", () =>
       expect(Raindrops.raindrops(3)) |> toEqual("Pling")
     );
     Skip.test("the sound for 5 is Plang", () =>
