@@ -3,11 +3,11 @@ open Jest;
 describe("Armstrong Numbers", () => {
   open Expect;
 
-  Skip.test("Single digit numbers are Armstrong numbers", () =>
+  test("Single digit numbers are Armstrong numbers", () =>
     expect(ArmstrongNumbers.validate(5)) |> toBe(true)
   );
 
-  Skip.test("There are no 2 digit Armstrong numbers", () =>
+  test("There are no 2 digit Armstrong numbers", () =>
     expect(ArmstrongNumbers.validate(10)) |> toBe(false)
   );
 
