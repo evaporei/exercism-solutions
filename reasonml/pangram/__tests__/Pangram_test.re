@@ -27,10 +27,10 @@ describe("Pangram", () => {
   test("missing letters replaced by numbers", () =>
     expect(isPangram("7h3 qu1ck brown fox jumps ov3r 7h3 lazy dog")) |> toEqual(false) 
   );
-  Skip.test("pangram with mixed case and punctuation", () =>
+  test("pangram with mixed case and punctuation", () =>
     expect(isPangram("\"Five quacking Zephyrs jolt my wax bed.\"")) |> toEqual(true) 
   );
-  Skip.test("upper and lower case versions of the same character should not be counted separately", () =>
+  test("upper and lower case versions of the same character should not be counted separately", () =>
     expect(isPangram("the quick brown fox jumps over with lazy FX")) |> toEqual(false) 
   );
 });
