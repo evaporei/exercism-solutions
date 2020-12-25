@@ -1,5 +1,7 @@
 let anagrams = (input, words) => {
-  let inputChars = Js.String.split("", input);
+  let inputChars = Js.String.split("", input)
+    ->Belt.Array.map(Js.String.toLowerCase);
+
   Array.sort(compare, inputChars);
 
   Belt.List.keep(

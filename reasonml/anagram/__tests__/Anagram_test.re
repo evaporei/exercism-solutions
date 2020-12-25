@@ -24,19 +24,19 @@ describe("Anagram", () => {
   test("does not detect non-anagrams with identical checksum", () =>
     expect(anagrams("mass", ["last"]))  |> toEqual([])
   );
-  Skip.test("detects anagrams case-insensitively", () =>
+  test("detects anagrams case-insensitively", () =>
     expect(anagrams("Orchestra", ["cashregister", "Carthorse", "radishes"]))  |> toEqual(["Carthorse"])
   );
-  Skip.test("detects anagrams using case-insensitive subject", () =>
+  test("detects anagrams using case-insensitive subject", () =>
     expect(anagrams("Orchestra", ["cashregister", "carthorse", "radishes"])) |> toEqual(["carthorse"])
   );
-  Skip.test("detects anagrams using case-insensitive possible matches", () =>
+  test("detects anagrams using case-insensitive possible matches", () =>
     expect(anagrams("orchestra", ["cashregister", "Carthorse", "radishes"])) |> toEqual(["Carthorse"])
   );
-  Skip.test("does not detect a anagram if the original word is repeated", () =>
+  test("does not detect a anagram if the original word is repeated", () =>
     expect(anagrams("go", ["go Go GO"])) |> toEqual([])
   );
-  Skip.test("anagrams must use all letters exactly once", () =>
+  test("anagrams must use all letters exactly once", () =>
     expect(anagrams("tapper", ["patter"])) |> toEqual([])
   );
   Skip.test("words are not anagrams of themselves (case-insensitive)", () =>
