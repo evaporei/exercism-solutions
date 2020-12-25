@@ -1,3 +1,7 @@
+let areSameLength = (a, b) => Js.String.length(a) !== Js.String.length(b);
+
+let equal = (a, b) => compare(a, b) === 0;
+
 let anagrams = (input, words) => {
   let lowerCaseInput = Js.String.toLowerCase(input);
   let inputChars = Js.String.split("", lowerCaseInput);
@@ -7,18 +11,18 @@ let anagrams = (input, words) => {
   Belt.List.keep(
     words,
     (word) => {
-      if (Js.String.length(input) !== Js.String.length(word)) {
+      if (areSameLength(input, word)) {
         false
       } else {
         let lowerCaseWord = Js.String.toLowerCase(word);
-        if (compare(lowerCaseInput, lowerCaseWord) === 0) {
+        if (equal(lowerCaseInput, lowerCaseWord)) {
           false
         } else {
           let wordChars = Js.String.split("", lowerCaseWord);
 
           Array.sort(compare, wordChars);
 
-          compare(inputChars, wordChars) === 0
+          equal(inputChars, wordChars)
         }
       }
     }
