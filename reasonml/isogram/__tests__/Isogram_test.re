@@ -19,7 +19,7 @@ describe("Isograms", () => {
     expect(Isogram.is_isogram("subdermatoglyphic")) |> toBe(true)
   );
 
-  Skip.test("Word with duplicated character in mixed case", () =>
+  test("Word with duplicated character in mixed case", () =>
     expect(Isogram.is_isogram("Alphabet")) |> toBe(false)
   );
 
