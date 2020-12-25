@@ -3,7 +3,7 @@ open Jest;
 describe("Isograms", () => {
   open Expect;
 
-  Skip.test("Empty string", () =>
+  test("Empty string", () =>
     expect(Isogram.is_isogram("")) |> toBe(true)
   );
 
