@@ -1,1 +1,5 @@
-let isPangram = _ => false;
+let isPangram = str => if (Js.String.length(str) === 0) {
+  false
+} else {
+  true
+};

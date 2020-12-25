@@ -3,7 +3,7 @@ open Expect;
 open Pangram;
 
 describe("Pangram", () => {
-  Skip.test("sentence empty", () =>
+  test("sentence empty", () =>
     expect(isPangram("")) |> toEqual(false) 
   );
   Skip.test("recognizes a perfect lower case pangram", () =>
