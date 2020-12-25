@@ -3,19 +3,19 @@ open Expect;
 open Anagram;
 
 describe("Anagram", () => {
-  Skip.test("no matches", () =>
+  test("no matches", () =>
     expect(anagrams("diaper", ["hello", "world", "zombies", "pants"])) |> toEqual([])
   );
-  Skip.test("detects two anagrams", () =>
+  test("detects two anagrams", () =>
     expect(anagrams("master", ["stream", "pigeon", "maters"])) |> toEqual(["stream", "maters"])
   );
-  Skip.test("does not detect anagram subsets", () =>
+  test("does not detect anagram subsets", () =>
     expect(anagrams("good", ["dog", "goody"]))  |> toEqual([])
   );
-  Skip.test("detects anagram", () =>
+  test("detects anagram", () =>
     expect(anagrams("listen", ["enlists", "google", "inlets", "banana"]))  |> toEqual(["inlets"])
   );
-  Skip.test("detects three anagrams", () =>
+  test("detects three anagrams", () =>
     expect(anagrams("allergy", ["gallery", "ballerina", "regally", "clergy", "largely", "leading"]))  |> toEqual(["gallery", "regally", "largely"])
   );
   Skip.test("detects multiple anagrams with different case", () =>
