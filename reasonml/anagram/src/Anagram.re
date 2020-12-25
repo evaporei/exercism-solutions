@@ -1,6 +1,6 @@
 let anagrams = (input, words) => {
-  let inputChars = Js.String.split("", input)
-    ->Belt.Array.map(Js.String.toLowerCase);
+  let lowerCaseInput = Js.String.toLowerCase(input);
+  let inputChars = Js.String.split("", lowerCaseInput);
 
   Array.sort(compare, inputChars);
 
@@ -10,11 +10,11 @@ let anagrams = (input, words) => {
       if (Js.String.length(input) !== Js.String.length(word)) {
         false
       } else {
-        if (compare(Js.String.toLowerCase(input), Js.String.toLowerCase(word)) === 0) {
+        let lowerCaseWord = Js.String.toLowerCase(word);
+        if (compare(lowerCaseInput, lowerCaseWord) === 0) {
           false
         } else {
-          let wordChars = Js.String.split("", word)
-            ->Belt.Array.map(Js.String.toLowerCase);
+          let wordChars = Js.String.split("", lowerCaseWord);
 
           Array.sort(compare, wordChars);
 
