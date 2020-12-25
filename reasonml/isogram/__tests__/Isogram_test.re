@@ -23,11 +23,11 @@ describe("Isograms", () => {
     expect(Isogram.is_isogram("Alphabet")) |> toBe(false)
   );
 
-  Skip.test("Hypothetical isogrammic word with hyphen", () =>
+  test("Hypothetical isogrammic word with hyphen", () =>
     expect(Isogram.is_isogram("thumbscrew-japingly")) |> toBe(true)
   );
 
-  Skip.test("Isogram with duplicated hyphen", () =>
+  test("Isogram with duplicated hyphen", () =>
     expect(Isogram.is_isogram("six-year-old")) |> toBe(true)
   );
 
