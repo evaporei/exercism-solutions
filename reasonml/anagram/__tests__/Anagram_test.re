@@ -18,10 +18,10 @@ describe("Anagram", () => {
   test("detects three anagrams", () =>
     expect(anagrams("allergy", ["gallery", "ballerina", "regally", "clergy", "largely", "leading"]))  |> toEqual(["gallery", "regally", "largely"])
   );
-  Skip.test("detects multiple anagrams with different case", () =>
+  test("detects multiple anagrams with different case", () =>
     expect(anagrams("nose", ["Eons", "ONES"]))  |> toEqual(["Eons", "ONES"])
   );
-  Skip.test("does not detect non-anagrams with identical checksum", () =>
+  test("does not detect non-anagrams with identical checksum", () =>
     expect(anagrams("mass", ["last"]))  |> toEqual([])
   );
   Skip.test("detects anagrams case-insensitively", () =>
