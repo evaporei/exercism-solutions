@@ -31,11 +31,11 @@ describe("Isograms", () => {
     expect(Isogram.is_isogram("six-year-old")) |> toBe(true)
   );
 
-  Skip.test("Made-up name that is an isogram", () =>
+  test("Made-up name that is an isogram", () =>
     expect(Isogram.is_isogram("Emily Jung Schwartzkopf")) |> toBe(true)
   );
 
-  Skip.test("Duplicated character in the middle", () =>
+  test("Duplicated character in the middle", () =>
     expect(Isogram.is_isogram("accentor")) |> toBe(false)
   );
 });

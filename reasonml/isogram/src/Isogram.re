@@ -18,6 +18,7 @@ let reducer = ((acc, keepSearching), curr) => {
 
 let is_isogram = str => str
   ->Js.String.replace("-", "", _)
+  ->Js.String.replace(" ", "", _)
   ->String.lowercase
   ->Js.String.split("", _)
   ->Belt.Array.reduce(
