@@ -39,10 +39,10 @@ describe("Anagram", () => {
   test("anagrams must use all letters exactly once", () =>
     expect(anagrams("tapper", ["patter"])) |> toEqual([])
   );
-  Skip.test("words are not anagrams of themselves (case-insensitive)", () =>
+  test("words are not anagrams of themselves (case-insensitive)", () =>
     expect(anagrams("BANANA", ["BANANA", "Banana", "banana"])) |> toEqual([])
   );
-  Skip.test("words other than themselves can be anagrams", () =>
+  test("words other than themselves can be anagrams", () =>
     expect(anagrams("LISTEN", ["Listen", "Silent", "LISTEN"])) |> toEqual(["Silent"])
   );
 })
