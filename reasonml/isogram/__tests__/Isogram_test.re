@@ -7,15 +7,15 @@ describe("Isograms", () => {
     expect(Isogram.is_isogram("")) |> toBe(true)
   );
 
-  Skip.test("Isogram with only lower case characters", () =>
+  test("Isogram with only lower case characters", () =>
     expect(Isogram.is_isogram("isogram")) |> toBe(true)
   );
 
-  Skip.test("Word with one duplicated character", () =>
+  test("Word with one duplicated character", () =>
     expect(Isogram.is_isogram("eleven")) |> toBe(false)
   );
 
-  Skip.test("Longest reported english isogram", () =>
+  test("Longest reported english isogram", () =>
     expect(Isogram.is_isogram("subdermatoglyphic")) |> toBe(true)
   );
 
